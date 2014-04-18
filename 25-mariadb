@@ -10,7 +10,7 @@ fi
 # Copy the configuration file.
 if [ -e /var/lib/mysql/my.cnf ]; then
   echo "Copying configuration..."
-  cp -v /var/lib/mysql/my.cnf /etc/my.cnf
+  mv -v /var/lib/mysql/my.cnf /etc/my.cnf
 fi
 
 # Run MariaDB
