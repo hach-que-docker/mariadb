@@ -7,7 +7,14 @@ if [ ! -d /var/lib/mysql ]; then
   exit 1
 fi
 
+# Copy the configuration file.
+if [ -e /var/lib/mysql/my.cnf ]; then
+  echo "Copying configuration..."
+  cp -v /var/lib/mysql/my.cnf /etc/my.cnf
+fi
+
 # Run MariaDB
+echo "Starting MariaDB..."
 /etc/init.d/mysql start
 
 # Wait for /var/run/mysql/mysqld.pid to appear and copy it.
