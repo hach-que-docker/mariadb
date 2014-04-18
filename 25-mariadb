@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Check to make sure /var/lib/mysql is present
+if [ ! -d /var/lib/mysql ]; then
+  echo "/var/lib/mysql is not present!"
+  echo "Make sure you map the host directory to the container"
+  exit 1
+fi
+
+# Run MariaDB
+/etc/init.d/mysql start
+
+# Wait for /var/run/mysql/mysqld.pid to appear and copy it.
+while [ ! -e /var/run/mysql/mysqld.pid ]; do
+  echo "Waiting for /var/run/mysql/mysqld.pid to appear..."
+  sleep 1
+done
+cp /var/run/mysql/mysqld.pid /run/watch/mariadb
+
