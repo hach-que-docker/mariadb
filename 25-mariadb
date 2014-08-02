@@ -20,7 +20,7 @@ fi
 
 # Run MariaDB
 echo "Starting MariaDB..."
-/etc/init.d/mysql start
+/usr/lib/mysql/rcmysql start
 
 # Wait for /var/run/mysql/mysqld.pid to appear and copy it.
 while [ ! -e /var/run/mysql/mysqld.pid ]; do

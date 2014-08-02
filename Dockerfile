@@ -7,6 +7,10 @@ RUN zypper --non-interactive ref
 # Install requirements
 RUN zypper --non-interactive in mariadb
 
+# Add users to /etc/passwd and /etc/group
+RUN echo "mysql:x:60:495:MariaDB daemon:/var/lib/mysql:/bin/false" >> /etc/passwd
+RUN echo "mysql:x:495:" >> /etc/group
+
 # Expose MariaDB on port 3306
 EXPOSE 3306
 
