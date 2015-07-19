@@ -20,12 +20,11 @@ fi
 
 # Run MariaDB
 echo "Starting MariaDB..."
-/usr/lib/mysql/rcmysql start
+/usr/lib/mysql/mysql-systemd-helper install   default
+/usr/lib/mysql/mysql-systemd-helper upgrade   default
+/usr/lib/mysql/mysql-systemd-helper start     default &
+MYSQL_PID=$!
+/usr/lib/mysql/mysql-systemd-helper wait      default
 
-# Wait for /var/run/mysql/mysqld.pid to appear and copy it.
-while [ ! -e /var/run/mysql/mysqld.pid ]; do
-  echo "Waiting for /var/run/mysql/mysqld.pid to appear..."
-  sleep 1
-done
-cp /var/run/mysql/mysqld.pid /run/watch/mariadb
+echo $MYSQL_PID > /run/watch/mariadb
 
